@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Mandi</string>
+    <string name="mandi">Mandi</string>
+    <string name="seller_name">Seller name</string>
+    <string name="gross_price">Gross Price</string>
+    <string name="sell_my_produce">Sell My Produce</string>
+    <string name="sell_more">Sell More</string>
+    <string name="loyalty_card_identifier">Loyalty card identifier</string>
+    <string name="village">Village</string>
+    <string name="gross_weight">Gross weight</string>
+    <string name="_23">23</string>
+    <string name="tonnes">Tonnes</string>
+    <string name="s1000">S1000</string>
+    <string name="pls_fill_fields">Please fill required fields</string>
+    <string name="_0_00_inr">0.00 INR</string>
+    <string name="applied_index_low">Applied loyalty index : 0.98</string>
+    <string name="applied_index_high">Applied loyalty index : 1.12</string>
+</resources>

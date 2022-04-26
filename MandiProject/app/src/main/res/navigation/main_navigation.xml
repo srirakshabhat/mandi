@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/sellProduceFragment">
+
+    <fragment
+        android:id="@+id/sellProduceFragment"
+        android:name="com.project.mandi.presentation.ui.SellProduceFragment"
+        android:label="sell_produce_fragment"
+        tools:layout="@layout/sell_produce_fragment" >
+        <action
+            android:id="@+id/action_sellProduceFragment_to_soldProduceFragment"
+            app:destination="@id/soldProduceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/soldProduceFragment"
+        android:name="com.project.mandi.presentation.ui.SoldProduceFragment"
+        android:label="sold_produce_fragment"
+        tools:layout="@layout/sold_produce_fragment" >
+        <action
+            app:popUpTo="@+id/sellProduceFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_soldProduceFragment_to_sellProduceFragment"
+            app:destination="@id/sellProduceFragment" />
+    </fragment>
+</navigation>

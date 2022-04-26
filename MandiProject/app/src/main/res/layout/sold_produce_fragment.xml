@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:padding="20dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.SoldProduceFragment">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:src="@drawable/fruits"
+        android:layout_width="250dp"
+        android:layout_height="250dp"/>
+    <TextView
+        android:id="@+id/ack_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:textColor="@color/black" />
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_gravity="bottom"
+        android:id="@+id/sell_more"
+        android:text="@string/sell_more"
+        style="@style/buttonStyle" />
+</LinearLayout>
