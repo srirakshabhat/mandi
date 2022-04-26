@@ -36,8 +36,6 @@ class SellProduceFragment : Fragment(), View.OnKeyListener{
         populateData()
         onSellerNameNextClick()
         onVillageSelected()
-        textWatcherForSellerName();
-        textWatcherForLoyaltyCard();
         return binding.root
     }
 
@@ -85,11 +83,13 @@ class SellProduceFragment : Fragment(), View.OnKeyListener{
             binding.sellerName.setText("")
             Toast.makeText(requireContext(), "Loyalty card id doesn't exist!", Toast.LENGTH_SHORT).show();
             binding.sellerName.isEnabled = true
+            binding.grossPriceData.text = getString(R.string._0_00_inr)
             setAppliedIndexData(getString(R.string.applied_index_low))
         }
         else {
             setAppliedIndexData(getString(R.string.applied_index_high))
         }
+        calculateTotalPrice()
     }
 
     /*popultae loyalty on seller name entered*/
@@ -111,8 +111,10 @@ class SellProduceFragment : Fragment(), View.OnKeyListener{
         else {
             setAppliedIndexData(getString(R.string.applied_index_high))
         }
+        calculateTotalPrice()
     }
 
+    /*to set loyalty index*/
     private fun setAppliedIndexData(text:String) {
         binding.appliedLoyaltyIndex.text = text
     }
@@ -157,7 +159,9 @@ class SellProduceFragment : Fragment(), View.OnKeyListener{
     /*on sell produce clicked*/
     private fun onSellProduceClick() {
         binding.sellProduce.setOnClickListener(View.OnClickListener {
-            getSavedDataObserver();
+
+            calculateTotalPrice()
+
             if(isMandatoryFieldsFilled()) {
                 val bundle = Bundle();
                 bundle.putString("seller_name", binding.sellerName.text.toString().trim());
@@ -178,21 +182,14 @@ class SellProduceFragment : Fragment(), View.OnKeyListener{
     }
 
     override fun onKey(view:View?, keyCode:Int, event:KeyEvent?):Boolean {
-        if(event!!.getAction() === KeyEvent.ACTION_DOWN) {
-            when (keyCode) {
-                KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+             if(keyCode ==  KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER){
                     when(view?.id){
                         R.id.seller_name -> populateLoyaltyCard()
                         R.id.loyalty_card_id -> populateSellerName()
-                        else -> {
-                            calculateTotalPrice()
-                        }
+                        else ->  calculateTotalPrice()
                     }
-                    calculateTotalPrice()
                     return true
-                }
             }
-        }
         return false
     }
 
@@ -213,38 +210,11 @@ class SellProduceFragment : Fragment(), View.OnKeyListener{
         if(isMandatoryFieldsFilled()){
             binding.appliedLoyaltyIndex.visibility = View.VISIBLE
             val calculatedPrice = (binding.appliedLoyaltyIndex.text.toString().replace("Applied loyalty index : ","").toDouble()
-                    * binding.weight.text.toString().toDouble() * 1000
+                    * (binding.weight.text.toString().toDouble() * 1000)
                     * (binding.spinnerVillage.selectedItem as VillageData).price)
             val df = DecimalFormat("#.##")
             df.roundingMode = RoundingMode.DOWN
             binding.grossPriceData.text = "${df.format(calculatedPrice)} INR"
         }
-    }
-
-
-    private fun textWatcherForLoyaltyCard() {
-        binding.loyaltyCardId.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s:CharSequence, start:Int, before:Int, count:Int) {
-            }
-
-            override fun beforeTextChanged(s:CharSequence, start:Int, count:Int, after:Int) {
-            }
-
-            override fun afterTextChanged(s:Editable) {
-            }
-        })
-    }
-
-    private fun textWatcherForSellerName() {
-        binding.sellerName.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s:CharSequence, start:Int, before:Int, count:Int) {
-            }
-
-            override fun beforeTextChanged(s:CharSequence, start:Int, count:Int, after:Int) {
-            }
-
-            override fun afterTextChanged(s:Editable) {
-            }
-        })
     }
 }
